@@ -1,0 +1,2 @@
+# ginting
+GIN Framework Template
