@@ -1,5 +1,6 @@
 # ginting
-GIN Framework Template
+[GIN](https://github.com/gin-gonic/gin) Framework Boilerplate
+untuk kamu yang dikejar waktu
 
 
 #### Development Work Flow with Dependecty Injection Google Wire

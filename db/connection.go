@@ -9,8 +9,6 @@ import (
 	"github.com/harisaginting/ginting/pkg/utils/helper"
 )
 
-
-
 func Connection() *gorm.DB {
 	var (
 		dbUser  = helper.MustGetEnv("DB_USER")
@@ -23,7 +21,7 @@ func Connection() *gorm.DB {
 	)
 	// dsn
 	dsn := fmt.Sprintf(`
-		host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s`,
+		host=%s user=%s password=%s database=%s port=%s sslmode=%s TimeZone=%s`,
 		dbHost,
 		dbUser,
 		dbPass,
@@ -33,7 +31,7 @@ func Connection() *gorm.DB {
 		TZ,
 	)
 
-	log.Print("dsn:", dsn)
+	log.Print("db:", dsn)
 	connect, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		PrepareStmt: true,
 		// set without default transaction

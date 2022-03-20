@@ -10,7 +10,6 @@ func RestV1(r *gin.RouterGroup, db *gorm.DB) {
 	// Dependency injection
 	apiUser := wire.ApiUser(db)
 
-
 	// group rest
 	rest := r.Group("rest")
 	{

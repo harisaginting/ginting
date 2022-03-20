@@ -9,7 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// sales order
 func ApiUser(db *gorm.DB) mUser.Controller {
 	googleWire.Build(
 		mUser.ProviderController,

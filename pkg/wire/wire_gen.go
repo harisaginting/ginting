@@ -13,7 +13,6 @@ import (
 
 // Injectors from wire.go:
 
-// sales order
 func ApiUser(db *gorm.DB) user.Controller {
 	repository := user.ProviderRepository(db)
 	service := user.ProviderService(repository)

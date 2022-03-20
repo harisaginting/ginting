@@ -1,8 +1,8 @@
 package user
 
 import "github.com/gin-gonic/gin"
+import "github.com/harisaginting/ginting/pkg/http/response"
 
-// sales order controller
 type Controller struct {
 	service Service
 }
@@ -14,5 +14,10 @@ func ProviderController(s Service) Controller {
 }
 
 func (ctrl *Controller) List(c *gin.Context) {
+	var resData ResponseList
+	ctrl.service.List(&resData)
+	
+	// return
+	response.Json(c,resData)
 	return
 }
