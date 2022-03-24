@@ -9,16 +9,19 @@ import (
 	"os"
 	// "log"
 
+	"github.com/harisaginting/ginting/pkg/tracer"
 	database "github.com/harisaginting/ginting/db"
 	router "github.com/harisaginting/ginting/api"
 	log "github.com/sirupsen/logrus"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 )
 
 func main() {
-	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	ctx, stop 	:= signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
+	tracer.InitTracer()
 
 	// DB CONNECTION
 	db := database.Connection()
@@ -40,6 +43,7 @@ func main() {
 
 	// error recorvery
 	app.Use(gin.CustomRecovery(panicHandler))
+	app.Use(otelgin.Middleware("ginting-server"))
 
 	// route
 	app.GET("/ping", ping)
@@ -47,7 +51,7 @@ func main() {
 	// API
 	api := app.Group("api")
 	router.RestV1(api, db)
-
+	
 	// handling server gracefully shutdown
 	srv := &http.Server{
 		Addr:    ":" + port,

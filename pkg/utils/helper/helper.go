@@ -1,6 +1,7 @@
 package helper
 
 import "os"
+import "strconv"
 import "encoding/json"
 
 // MustGetEnv get environment value
@@ -17,4 +18,30 @@ func AdjustStructToStruct(a interface{},b interface{}) interface{} {
 	JsonStruct, _ := json.Marshal(a)
 	json.Unmarshal([]byte(JsonStruct), &b)
 	return b
+}
+
+func ForceInt(v interface{}) int {
+	var result int
+	switch v.(type) {
+	case int:
+		result = v.(int)
+	case float64:
+		result = int(v.(float64))
+	case string:
+		result, _ = strconv.Atoi(v.(string))
+	}
+	return result
+}
+
+func ForceString(v interface{}) string {
+	var result string
+	switch v.(type) {
+	case int:
+		result = strconv.Itoa(v.(int))
+	case float64:
+		result = strconv.Itoa(int(v.(float64)))
+	case string:
+		result, _ = v.(string)
+	}
+	return result
 }
