@@ -3,6 +3,7 @@ module github.com/harisaginting/ginting
 go 1.17
 
 require (
+	github.com/cristalhq/jwt/v3 v3.1.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
 	github.com/google/wire v0.5.0
@@ -18,6 +19,7 @@ require (
 )
 
 require (
+	github.com/cristalhq/jwt/v4 v4.0.0-beta1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

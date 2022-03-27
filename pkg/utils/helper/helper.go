@@ -3,6 +3,8 @@ package helper
 import "os"
 import "strconv"
 import "encoding/json"
+import "math/big"
+import "encoding/base64"
 
 // MustGetEnv get environment value
 func MustGetEnv(key string) string {
@@ -12,7 +14,6 @@ func MustGetEnv(key string) string {
 	}
 	return value
 }
-
 
 func AdjustStructToStruct(a interface{},b interface{}) interface{} {
 	JsonStruct, _ := json.Marshal(a)
@@ -44,4 +45,10 @@ func ForceString(v interface{}) string {
 		result, _ = v.(string)
 	}
 	return result
+}
+
+
+func DecodeBase64BigInt(s string) *big.Int {
+	buffer, _ := base64.URLEncoding.WithPadding(base64.NoPadding).DecodeString(s)
+	return big.NewInt(0).SetBytes(buffer)
 }
