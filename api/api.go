@@ -26,7 +26,8 @@ func RestV1(r *gin.RouterGroup, db *gorm.DB) {
 			// user
 			apiUserGroup := v1.Group("user")
 			{
-				apiUserGroup.GET("/", keycloak.Validate([]string{"customerservice:dashboard:email-logs:read"}), apiUser.List)
+				// apiUserGroup.GET("/", keycloak.Validate([]string{"userservice:dashboard:activity-logs:read"}), apiUser.List)
+				apiUserGroup.GET("/", keycloak.Validate([]string{"userservice:dashboard:activity-logs:read"}), apiUser.ListGRPC)
 			}
 		}
 	}

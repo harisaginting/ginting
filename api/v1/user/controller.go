@@ -25,3 +25,15 @@ func (ctrl *Controller) List(c *gin.Context) {
 	response.Json(c,resData)
 	return
 }
+
+func (ctrl *Controller) ListGRPC(c *gin.Context) {
+	span := tracer.Span("ListUserControllerGRPC")
+	defer span.End()
+
+	var resData string
+	res := ctrl.service.ListGRPC(resData)
+	resData = res
+	// return
+	response.Json(c,resData)
+	return
+}
