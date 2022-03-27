@@ -22,10 +22,10 @@ untuk kamu yang dikejar waktu
 ## TODO
 - sample GIN Routing Group :white_check_mark:
 - sample ORM database with [GORM](https://gorm.io/) :white_check_mark:
-- sample Dependecy Injection with [Google Wire](https://github.com/google/wire)
+- sample Dependecy Injection with [Google Wire](https://github.com/google/wire) :white_check_mark:
 - sample [Opentelemetry](https://opentelemetry.io/) with exporter [Jaeger](https://www.jaegertracing.io/) :white_check_mark:
 - sample [Keycloak](https://www.keycloak.org/) Middleware :white_check_mark:
-- sample [GRPC](https://grpc.io/) Service Middleware :white_check_mark:
+- sample [GRPC](https://grpc.io/) Service :white_check_mark:
 - sample logging with [Logrus](https://github.com/sirupsen/logrus) 
 - sample email notification with [Hermes](https://github.com/matcornic/hermes) 
 - sample Telegram Notification 
