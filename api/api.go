@@ -14,7 +14,7 @@ func RestV1(r *gin.RouterGroup, db *gorm.DB) {
 	// Dependency injection
 	apiUser := wire.ApiUser(db)
 
-	cfgkc 	 := helper.ForceInt(helper.MustGetEnv("KEUCLOAK"))
+	cfgkc 	 := helper.ForceInt(helper.MustGetEnv("KEYCLOAK"))
 	keycloak := kc.Start(cfgkc)
 
 	// group rest
