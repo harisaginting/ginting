@@ -2,6 +2,16 @@ version: '3.8'
 
 services:
 
+  #redis
+  credis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - credis:/data
+  
   # Net Tools
   nettools:
     container_name: nettools

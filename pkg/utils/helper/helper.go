@@ -1,6 +1,7 @@
 package helper
 
 import "os"
+import "errors"
 import "strconv"
 import "encoding/json"
 import "math/big"
@@ -11,6 +12,14 @@ func MustGetEnv(key string) string {
 	value := os.Getenv(key)
 	if len(value) == 0 {
 		return ""
+	}
+	return value
+}
+
+func GetEnvOrDefault(key string, defaultValue string) string {
+	value := os.Getenv(key)
+	if len(value) == 0 {
+		return defaultValue
 	}
 	return value
 }
@@ -44,6 +53,11 @@ func ForceString(v interface{}) string {
 	case string:
 		result, _ = v.(string)
 	}
+	return result
+}
+
+func ForceError(v interface{}) error {
+	result := errors.New(ForceString(v))
 	return result
 }
 

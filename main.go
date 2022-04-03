@@ -7,12 +7,13 @@ import (
 	"syscall"
 	"time"
 	"os"
-	// "log"
+	"fmt"
 
 	"github.com/harisaginting/ginting/pkg/tracer"
 	database "github.com/harisaginting/ginting/db"
 	router "github.com/harisaginting/ginting/api"
-	log "github.com/sirupsen/logrus"
+	"github.com/harisaginting/ginting/pkg/log"
+	"github.com/harisaginting/ginting/pkg/utils/helper"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -60,22 +61,22 @@ func main() {
 	// Initializing the server in a goroutine
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Info("listen: %s\n", err)
+			log.Info(ctx, fmt.Sprintf("listen: %s", port))
 		}
 	}()
 	// Listen for the interrupt signal.
 	<-ctx.Done()
 	// Restore default behavior on the interrupt signal and notify user of shutdown.
 	stop()
-	log.Warn("shutting down gracefully, press Ctrl+C again to force 🔴")
+	log.Warn(ctx,"shutting down gracefully, press Ctrl+C again to force 🔴")
 	// The context is used to inform the server it has 5 seconds to finish
 	// the request it is currently handling
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Warn("Server forced to shutdown 🔴: ", err)
+		log.Warn(ctx,"Server forced to shutdown 🔴: ", err)
 	}
-	log.Warn("Server shutdown 🔴")
+	log.Warn(ctx,"Server shutdown 🔴")
 }
 
 func lostInSpce(c *gin.Context) {
@@ -96,7 +97,9 @@ func ping(c *gin.Context) {
 
 // Custom Recovery Panic Error
 func panicHandler(c *gin.Context, err interface{}) {
-	log.Error("Panic Error 🔴: ", err)
+	ctx 	:= c.Request.Context()
+	newerr 	:= helper.ForceError(err)
+	log.Error(ctx, newerr, "Panic Error 🔴")
     c.JSON(500, gin.H{
     	"status" : 500,
         "error_message":   err,

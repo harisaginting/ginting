@@ -1,4 +1,5 @@
 package user
+
 import "log"
 import "gorm.io/gorm"
 import "github.com/harisaginting/ginting/db/table"

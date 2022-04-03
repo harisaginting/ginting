@@ -17,13 +17,8 @@ import (
 
 )
 
-var ctx context.Context
 var span oteltrace.Span
 var tracer oteltrace.Tracer
-
-func init(){
-	ctx = context.Background()
-}
 
 func InitTracer() {
 	otel.SetTextMapPropagator(propagation.TraceContext{})
@@ -59,7 +54,7 @@ func InitTracer() {
 	tracer = tp.Tracer("ginting-app")
 }
 
-func Span(name string) oteltrace.Span {
+func Span(ctx context.Context, name string) oteltrace.Span {
 	_, span = tracer.Start(ctx,name)
 	return span
 }
@@ -72,4 +67,8 @@ func SetAttributeString(span oteltrace.Span,key string, value interface{}){
 func SetAttributeInt(span oteltrace.Span,key string, value interface{}){
 	val := helper.ForceInt(value)
 	span.SetAttributes(attribute.Int(key, val))
+}
+
+func addEvent(span oteltrace.Span,event string){
+	span.AddEvent(event)
 }

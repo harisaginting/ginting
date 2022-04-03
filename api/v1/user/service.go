@@ -1,5 +1,6 @@
 package user
 
+import "context"
 import "github.com/harisaginting/ginting/pkg/tracer"
 import srv "github.com/harisaginting/ginting/service/samplegrpc"
 
@@ -13,10 +14,9 @@ func ProviderService(r Repository) Service {
 	}
 }
 
-func (service *Service) List(res *ResponseList) {
-	trace := tracer.Span("ListUser")
+func (service *Service) List(ctx context.Context, res *ResponseList) {
+	trace := tracer.Span(ctx,"ListUser")
 	defer trace.End()
-
 	users := service.repo.FindAll()
 	res.Items = users
 	res.Total = len(users)
@@ -25,8 +25,8 @@ func (service *Service) List(res *ResponseList) {
 	return
 }
 
-func (service *Service) ListGRPC(param string) (res string) {
-	trace := tracer.Span("ListUser")
+func (service *Service) ListGRPC(ctx context.Context, param string) (res string) {
+	trace := tracer.Span(ctx, "ListUser")
 	defer trace.End()
 
 	// CALL GRPC SAMPLE

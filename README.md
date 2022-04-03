@@ -1,5 +1,5 @@
 # GINting Boilerplate
-[GIN](https://github.com/gin-gonic/gin) Framework Boilerplate
+[GIN](https://github.com/gin-gonic/gin) Boilerplate
 untuk kamu yang dikejar waktu
 
 ## Run Command
@@ -26,10 +26,10 @@ untuk kamu yang dikejar waktu
 - sample [Opentelemetry](https://opentelemetry.io/) with exporter [Jaeger](https://www.jaegertracing.io/) :white_check_mark:
 - sample [Keycloak](https://www.keycloak.org/) Middleware :white_check_mark:
 - sample [GRPC](https://grpc.io/) Service Middleware :white_check_mark:
-- sample logging with [Logrus](https://github.com/sirupsen/logrus) 
-- sample email notification with [Hermes](https://github.com/matcornic/hermes) 
+- sample logging with [Logrus](https://github.com/sirupsen/logrus) :white_check_mark:
+- sample email notification
 - sample Telegram Notification 
-- sample redis connection
+- sample redis cache
 - sample google pub/subs
 - sample google cloud tasks
 - etc..
